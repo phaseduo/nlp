@@ -1,0 +1,13 @@
+version: '2'
+services:
+
+  nlp:
+    image: python:2.7.12
+    container_name: "phaseduo_nlp"
+    build: .
+    command: "flask run --host=0.0.0.0"
+    ports:
+      - "8000:5000"
+    volumes:
+      - ".:/phaseduo_nlp"
+    env_file: .env
