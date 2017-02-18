@@ -15,7 +15,7 @@ def response_maker(function):
   """
   try:
     result = function()
-  except BaseException as e:
+  except (BaseException, RuntimeError) as e:
     return json.jsonify(
       status=400,
       message=e.message,
@@ -29,7 +29,7 @@ def response_maker(function):
   )
 
 
-@app.route('/', methods=["POST"])
+@app.route('/api')
 def api_entrypoint():
   return json.jsonify(
     status=200,
@@ -38,28 +38,29 @@ def api_entrypoint():
   )
 
 
-@app.route('/cards/sentence', methods=["POST"])
+@app.route('/api/cards/sentence', methods=["POST"])
 def api_cards_sentence():
   sentence = request.get_json(force=True, silent=True)
-  return response_maker(info_cards.sentence(sentence))
+  return response_maker(lambda: info_cards.sentence(sentence))
 
 
-@app.route('/cards/corpus', methods=["POST"])
+@app.route('/api/cards/corpus', methods=["POST"])
 def api_cards_corpus():
   corpus = request.get_json(force=True, silent=True)
-  return response_maker(info_cards.corpus(corpus))
+  return response_maker(lambda: info_cards.corpus(corpus))
 
 
-@app.route('/summary/corpus', methods=["POST"])
+@app.route('/api/summary/corpus', methods=["POST"])
 def api_summary_corpus():
   corpus = request.get_json(force=True, silent=True)
-  return response_maker(summary.corpus(corpus))
+  return response_maker(lambda: summary.corpus(corpus))
 
 
-@app.route('/search/<string:word>')
+@app.route('/api/search/<string:word>')
 def api_search_word(word):
-  return response_maker(search_word(word))
+  return response_maker(lambda: search_word(word))
 
 
 if __name__ == "__main__":
-  app.run(port=environ.get("PORT"))
+  app.run(host="0.0.0.0",
+          port=int(environ.get("PORT")))
