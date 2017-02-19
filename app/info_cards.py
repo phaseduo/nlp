@@ -2,7 +2,6 @@ from multiprocessing.pool import ThreadPool
 from summa import keywords
 import search_word
 import spacy
-import numpy
 
 
 nlp = spacy.load("en")
