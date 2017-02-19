@@ -11,29 +11,29 @@ All the API endpoints are accessible under the prefix `<hostname>/api/`. All the
 
 ```json
 {
-  "status": <int>,
-  "message": <string>,
-  "data": <ApiEndpointOutput>
+  "status": "<int>",
+  "message": "<string>",
+  "data": "<ApiEndpointOutput>"
 }
 ```
 
 1. `/cards/sentence`
   * Given a sentence, find key topics, form "card" objects around those important key terms and define those key topics in that sentence.
-    * ** POST **
+    * **POST**
     * Accepts {sentence}
     * Returns [{topic, shortDescription, description, entity, imgUrl}]
 2. `/cards/corpus`
   * Given a corpus of text, find key topics, form "card" objects around those important key terms and define those key topics in that corpus.
-    * ** POST **
+    * **POST**
     * Accepts {corpus}
     * Returns [{topic, shortDescription, description, entity, imgUrl}]
 3. `/summary/corpus`
   * Summarize an entire corpus of text.
-    * ** POST **
+    * **POST**
     * Accepts {corpus}
     * Returns {summary}
 3. `/search/<word>`
   * Search for the definition/explanation of a word
-    * ** GET **
+    * **GET**
     * Returns [{topic, shortDescription, description, entity, imgUrl}]
 
