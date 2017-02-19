@@ -1,3 +1,5 @@
+from summa import summarizer
+
 
 def corpus(corpus):
   """
@@ -5,4 +7,4 @@ def corpus(corpus):
   :param corpus:
   :return:
   """
-  pass
+  return summarizer.summarize(corpus, words=280)
