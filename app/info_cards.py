@@ -79,8 +79,6 @@ def sentence(sentence):
     _map_info_thread_,
     keywords_list
   )
-  thread_pool.close()
-  thread_pool.join()
 
   return [item for sublist in cards for item in sublist]
 
@@ -97,7 +95,5 @@ def corpus(corpus):
     _map_info_thread_,
     keywords_list
   )
-  thread_pool.close()
-  thread_pool.join()
 
   return [item for sublist in cards for item in sublist]

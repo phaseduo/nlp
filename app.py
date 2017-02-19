@@ -18,11 +18,13 @@ def response_maker(function):
   try:
     result = function()
   except (BaseException, RuntimeError) as e:
-    return json.jsonify(
+    response = json.jsonify(
       status=400,
       message=e.message,
       data=dict()
     )
+    setattr(response, "status_code", 400)
+    return response
 
   return json.jsonify(
     status=200,
