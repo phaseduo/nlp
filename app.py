@@ -40,19 +40,19 @@ def api_entrypoint():
 
 @app.route('/api/cards/sentence', methods=["POST"])
 def api_cards_sentence():
-  sentence = request.get_json(force=True, silent=True)
+  sentence = request.get_json(force=True).get('sentence')
   return response_maker(lambda: info_cards.sentence(sentence))
 
 
 @app.route('/api/cards/corpus', methods=["POST"])
 def api_cards_corpus():
-  corpus = request.get_json(force=True, silent=True)
+  corpus = request.get_json(force=True).get('corpus')
   return response_maker(lambda: info_cards.corpus(corpus))
 
 
 @app.route('/api/summary/corpus', methods=["POST"])
 def api_summary_corpus():
-  corpus = request.get_json(force=True, silent=True)
+  corpus = request.get_json(force=True).get('corpus')
   return response_maker(lambda: summary.corpus(corpus))
 
 
