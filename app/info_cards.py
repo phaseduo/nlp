@@ -5,6 +5,7 @@ import spacy
 
 
 nlp = spacy.load("en")
+thread_pool = ThreadPool(4)
 
 
 def _keywords_(corpus):
@@ -59,9 +60,11 @@ def _map_info_thread_((label, word)):
   results_list = search_word.search_word(word)
 
   def transformer(result):
-    result["entity"] = label
+    if label:
+      result["entity"] = label
     return result
-  return map(transformer, results_list)
+  results_list = map(transformer, results_list)
+  return results_list
 
 
 def sentence(sentence):
@@ -70,7 +73,6 @@ def sentence(sentence):
   :param sentence:
   :return: [{topic, shortDescription, description, entity, imgUrl}]
   """
-  thread_pool = ThreadPool(3)
   keywords_list = _keywords_(corpus)
 
   cards = thread_pool.map(
@@ -89,7 +91,6 @@ def corpus(corpus):
   :param corpus:
   :return: [{topic, shortDescription, description, entity, imgUrl}]
   """
-  thread_pool = ThreadPool(20)
   keywords_list = _keywords_(corpus)
 
   cards = thread_pool.map(

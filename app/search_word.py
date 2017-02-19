@@ -45,7 +45,14 @@ def knowledge_graph_api(word):
 
 
 def wikipedia_api(word):
-  wikipediaPage = wikipedia.page(word)
+  try:
+    wikipediaPage = wikipedia.page(word)
+  except wikipedia.exceptions.DisambiguationError as e:
+    if len(e.options) == 0:
+      return []
+    else:
+      wikipediaPage = wikipedia.page(e.options[0])
+
   sentence_list = list(segmenter.split_single(
     wikipediaPage.summary
   ))

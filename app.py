@@ -1,9 +1,11 @@
 from flask import Flask, json, request
 from os import environ
 from app import info_cards, search_word, summary
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 def response_maker(function):
