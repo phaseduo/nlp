@@ -7,4 +7,4 @@ def corpus(corpus):
   :param corpus:
   :return:
   """
-  return summarizer.summarize(corpus, words=280)
+  return summarizer.summarize(corpus, words=100)
