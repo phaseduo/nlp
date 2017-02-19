@@ -9,7 +9,7 @@ def knowledge_graph_api(word):
   service_url = 'https://kgsearch.googleapis.com/v1/entities:search'
   request_object = requests.get(service_url, params={
     'query': word,
-    'limit': 2,
+    'limit': 1,
     'indent': False,
     'key': environ.get("GK_API_KEY")
   })
