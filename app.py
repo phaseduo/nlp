@@ -67,4 +67,5 @@ def api_search_word(word):
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0",
-          port=int(environ.get("PORT")))
+          port=int(environ.get("PORT")),
+          threaded=True)
